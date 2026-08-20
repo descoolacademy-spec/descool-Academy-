@@ -85,7 +85,7 @@
       position: absolute;
       border-radius: 50%;
       pointer-events: none;
-      background: rgba(244, 196, 48, ${Math.random() * 0.5 + 0.1});
+      background: rgba(${Math.random() > 0.5 ? '226, 61, 169' : '125, 203, 202'}, ${Math.random() * 0.5 + 0.1});
       width: ${Math.random() * 4 + 2}px;
       height: ${Math.random() * 4 + 2}px;
       left: ${Math.random() * 100}%;
@@ -413,7 +413,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   lightboxContent.style.cssText = `
     max-width: 800px; width: 100%;
     background: #0d2347;
-    border: 1px solid rgba(244,196,48,0.3);
+    border: 1px solid rgba(125,203,202,0.3);
     border-radius: 16px;
     padding: 24px;
     text-align: center;
@@ -432,7 +432,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   const lightboxTitle = document.createElement('h3');
   lightboxTitle.style.cssText = `
     font-family: 'Playfair Display', serif;
-    color: #F4C430; font-size: 1.3rem;
+    color: #7dcbca; font-size: 1.3rem;
     margin-bottom: 8px;
   `;
 
@@ -440,19 +440,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   lightboxClose.textContent = '✕ Close';
   lightboxClose.style.cssText = `
     margin-top: 12px; padding: 10px 28px;
-    background: rgba(244,196,48,0.15);
-    border: 1.5px solid #F4C430;
-    color: #F4C430; border-radius: 50px;
+    background: rgba(125,203,202,0.15);
+    border: 1.5px solid #7dcbca;
+    color: #7dcbca; border-radius: 50px;
     cursor: pointer; font-size: 0.9rem;
     font-weight: 600; transition: all 0.3s;
   `;
   lightboxClose.addEventListener('mouseenter', () => {
-    lightboxClose.style.background = '#F4C430';
+    lightboxClose.style.background = '#7dcbca';
     lightboxClose.style.color = '#0d2347';
   });
   lightboxClose.addEventListener('mouseleave', () => {
-    lightboxClose.style.background = 'rgba(244,196,48,0.15)';
-    lightboxClose.style.color = '#F4C430';
+    lightboxClose.style.background = 'rgba(125,203,202,0.15)';
+    lightboxClose.style.color = '#7dcbca';
   });
 
   lightboxContent.appendChild(lightboxImg);
@@ -523,5 +523,7 @@ window.addEventListener('load', () => {
   });
 });
 
-console.log('%c🎓 Descool Academy', 'color:#F4C430; font-size:20px; font-weight:bold; background:#0d2347; padding:8px 16px; border-radius:8px;');
+console.log('%c🎓 Descool Academy', 'color:#7dcbca; font-size:20px; font-weight:bold; background:#0d2347; padding:8px 16px; border-radius:8px;');
 console.log('%cPremier CLAT & Law Coaching Institute', 'color:#9ca3af; font-size:12px;');
+
+
