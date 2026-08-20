@@ -531,7 +531,6 @@ console.log('%cPremier CLAT & Law Coaching Institute', 'color:#9ca3af; font-size
 // =============================================
 // BASIC SOURCE CODE PROTECTION
 // =============================================
-document.addEventListener('contextmenu', event => event.preventDefault());
 document.addEventListener('keydown', function (event) {
   // Prevent F12
   if (event.keyCode == 123) {
@@ -550,3 +549,4 @@ document.addEventListener('keydown', function (event) {
     return false;
   }
 });
+
