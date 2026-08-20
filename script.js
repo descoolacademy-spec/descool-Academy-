@@ -527,3 +527,26 @@ console.log('%c🎓 Descool Academy', 'color:#7dcbca; font-size:20px; font-weigh
 console.log('%cPremier CLAT & Law Coaching Institute', 'color:#9ca3af; font-size:12px;');
 
 
+
+// =============================================
+// BASIC SOURCE CODE PROTECTION
+// =============================================
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('keydown', function (event) {
+  // Prevent F12
+  if (event.keyCode == 123) {
+    return false;
+  }
+  // Prevent Ctrl+Shift+I (Inspect)
+  if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+    return false;
+  }
+  // Prevent Ctrl+Shift+J (Console)
+  if (event.ctrlKey && event.shiftKey && event.keyCode == 74) {
+    return false;
+  }
+  // Prevent Ctrl+U (View Source)
+  if (event.ctrlKey && event.keyCode == 85) {
+    return false;
+  }
+});
