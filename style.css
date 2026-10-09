@@ -1692,8 +1692,8 @@ input, textarea, select { font-family: inherit; }
 /* Back to top */
 .back-to-top {
   position: fixed;
-  bottom: 32px;
-  right: 32px;
+  bottom: 108px;
+  right: 34px;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -1718,6 +1718,156 @@ input, textarea, select { font-family: inherit; }
 .back-to-top:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(125,203,202,0.4);
+}
+
+/* =============================================
+   FLOATING WHATSAPP BUTTON (STATIC ON SCROLL)
+   ============================================= */
+.whatsapp-float-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 1000;
+  width: 68px;
+  height: 68px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.5);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.whatsapp-float-btn:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 14px 36px rgba(37, 211, 102, 0.65);
+  color: #ffffff;
+}
+
+.whatsapp-float-btn svg {
+  width: 38px;
+  height: 38px;
+  fill: #ffffff;
+}
+
+.whatsapp-float-btn::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 2px solid #25D366;
+  opacity: 0.6;
+  animation: waPulse 2s infinite ease-in-out;
+}
+
+@keyframes waPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.25); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* =============================================
+   CONTACT POPUP MODAL (5s TIMER)
+   ============================================= */
+.contact-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 35, 71, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.contact-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.contact-modal-container {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 36px 32px;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(125, 203, 202, 0.3);
+}
+
+.contact-modal-overlay.active .contact-modal-container {
+  transform: scale(1) translateY(0);
+}
+
+.contact-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.contact-modal-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+  transform: rotate(90deg);
+}
+
+.contact-modal-header {
+  margin-bottom: 24px;
+  text-align: center;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.contact-modal-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #0d2347;
+  margin-bottom: 8px;
+}
+
+.contact-modal-header p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.modal-form {
+  box-shadow: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
 }
 
 /* =============================================
@@ -1847,7 +1997,9 @@ input, textarea, select { font-family: inherit; }
 
   .footer-bottom-inner { flex-direction: column; text-align: center; }
 
-  .back-to-top { bottom: 20px; right: 20px; }
+  .whatsapp-float-btn { bottom: 20px; right: 18px; width: 60px; height: 60px; }
+  .whatsapp-float-btn svg { width: 34px; height: 34px; }
+  .back-to-top { bottom: 92px; right: 24px; width: 44px; height: 44px; }
 }
 
 @media (max-width: 480px) {
