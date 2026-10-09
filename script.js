@@ -354,6 +354,103 @@
 })();
 
 // =============================================
+// 7.5 AUTO CONTACT POPUP (5 SECONDS DELAY)
+// =============================================
+(function () {
+  const modal = document.getElementById('contactModal');
+  const closeBtn = document.getElementById('contactModalClose');
+  const popupForm = document.getElementById('popupContactForm');
+  const popSubmitBtn = document.getElementById('popSubmitBtn');
+  const popSuccessMsg = document.getElementById('popFormSuccess');
+
+  if (!modal) return;
+
+  // Show popup 5 seconds after page load
+  setTimeout(() => {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }, 5000);
+
+  const closeModal = () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  // Close when clicking backdrop outside modal content
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Close on ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+
+  // Form Submission via Web3Forms
+  if (popupForm) {
+    popupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      let valid = true;
+      const required = popupForm.querySelectorAll('[required]');
+
+      required.forEach(field => {
+        field.classList.remove('error');
+        if (!field.value.trim()) {
+          field.classList.add('error');
+          valid = false;
+        }
+        if (field.type === 'email' && field.value) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(field.value)) {
+            field.classList.add('error');
+            valid = false;
+          }
+        }
+      });
+
+      if (!valid) return;
+
+      popSubmitBtn.innerHTML = '<span>Sending...</span>';
+      popSubmitBtn.disabled = true;
+
+      const formData = new FormData(popupForm);
+
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          popupForm.reset();
+          popSuccessMsg.innerHTML = "✅ Thank you! Your inquiry has been submitted. We will contact you shortly.";
+          popSuccessMsg.classList.add('show');
+          setTimeout(() => {
+            popSuccessMsg.classList.remove('show');
+            closeModal();
+          }, 3500);
+        } else {
+          alert("Form submission error: " + (data.message || "Please verify your Web3Forms access key."));
+        }
+      } catch (err) {
+        alert("Network error: Could not send your message.");
+      } finally {
+        popSubmitBtn.innerHTML = '<span>Submit Inquiry</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+        popSubmitBtn.disabled = false;
+      }
+    });
+
+    popupForm.querySelectorAll('input, select, textarea').forEach(field => {
+      field.addEventListener('input', () => field.classList.remove('error'));
+    });
+  }
+})();
+
+// =============================================
 // 8. BACK TO TOP
 // =============================================
 (function () {
